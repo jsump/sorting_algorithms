@@ -10,7 +10,20 @@ void quick_sort_recursive(int *array, int low, int high);
  */
 void quick_sort(int *array, size_t size)
 {
-	quick_sort_recursive(array, 0, size - 1);
+	int pi, k, low, high;
+
+        if (low < high)
+        {
+                pi = partition(array, low, high);
+
+                for (k = low; k <= high; k++)
+                        printf("%d ", array[k]);
+                printf("\n");
+
+                quick_sort(array, low, pi - 1);
+                quick_sort(array, pi + 1, high);;
+        }
+}
 }
 
 /**
@@ -37,12 +50,12 @@ void swap(int *a, int *b)
  */
 int partition(int *array, int low, int high)
 {
-	int pivot, i, j, k;
+	int pivot, i, j;
 
 	pivot = array[high];
 	i = low - 1;
 
-	for (j = low; j <= high - 1; j++)
+	for (j = low; j <= high; j++)
 	{
 		if (array[j] < pivot)
 		{
@@ -51,36 +64,5 @@ int partition(int *array, int low, int high)
 		}
 	}
 	swap(&array[i + 1], &array[high]);
-	for (k = low; k <= high; k++)
-	{
-		printf("%d ", array[k]);
-	}
-	printf("\n");
 	return (i + 1);
-}
-
-/**
- * quick_sort_recursive - recursively call itself on,
- * each of the partitions.
- * @array: array of integers
- * @low: lower integer
- * @high: higher integer
- */
-void quick_sort_recursive(int *array, int low, int high)
-{
-	int pi, k;
-
-	if (low < high)
-	{
-		pi = partition(array, low, high);
-
-		for (k = low; k <= high; k++)
-		{
-			printf("%d ", array[k]);
-		}
-		printf("\n");
-
-		quick_sort_recursive(array, low, pi - 1);
-		quick_sort_recursive(array, pi + 1, high);
-	}
 }
