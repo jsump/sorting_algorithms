@@ -10,6 +10,34 @@ void swap(int *a, int *b);
 void bubble_sort(int *array, size_t size)
 {
 	size_t i, j, k;
+	int sorted;
+
+	if (size == 0)
+	{
+		printf("Empty array\n");
+		return;
+	}
+	if (size == 1)
+	{
+		printf("Only one element in array\n");
+		return;
+	}
+	sorted = 1;
+	for (i = 0; i < size - 1; i++)
+	{
+		if (array[i] > array[i + 1])
+		{
+			sorted = 0;
+			break;
+		}
+	}
+
+	if (sorted)
+	{
+		printf("Array has already been sorted:\n");
+		print_array(array, size);
+		return;
+	}
 
 	for (i = 0; i < size - 1; i++)
 	{
