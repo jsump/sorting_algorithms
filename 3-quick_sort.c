@@ -1,6 +1,8 @@
 #include "sort.h"
 
 void quick_sort_recursive(int *array, int low, int high);
+void swap(int *a, int *b);
+int partition(int *array, int low, int high);
 
 /**
  * quick_sort - sortsan array of integers in ascending order,
@@ -10,20 +12,19 @@ void quick_sort_recursive(int *array, int low, int high);
  */
 void quick_sort(int *array, size_t size)
 {
-	int pi, k, low, high;
+	size_t i;
 
-        if (low < high)
-        {
-                pi = partition(array, low, high);
+	i = 0;
 
-                for (k = low; k <= high; k++)
-                        printf("%d ", array[k]);
-                printf("\n");
+	for ( i = 0; i < size; i++)
+	{
+		printf("%d", array[i]);
+		if (i < size - 1)
+			printf(", ");
+	}
+	printf("\n");
 
-                quick_sort(array, low, pi - 1);
-                quick_sort(array, pi + 1, high);;
-        }
-}
+	quick_sort_recursive(array, 0, size - 1);
 }
 
 /**
@@ -65,4 +66,32 @@ int partition(int *array, int low, int high)
 	}
 	swap(&array[i + 1], &array[high]);
 	return (i + 1);
+}
+
+/**
+ * quick_sort_recursive - Repeats the sorting algorthms
+ * for each piece of divided array.
+ * @array: array of integers
+ * @low: lower index
+ * @high: higher index
+ */
+void quick_sort_recursive(int *array, int low, int high)
+{
+	int pi, k;
+
+	if (low < high)
+	{
+		pi = partition(array, low, high);
+
+		for (k = 0; k < high + 1; k++)
+		{
+			printf("%d", array[k]);
+			if (k < high)
+				printf(", ");
+		}
+		printf("\n");
+
+		quick_sort_recursive(array, low, pi - 1);
+		quick_sort_recursive(array, pi + 1, high);
+	}
 }

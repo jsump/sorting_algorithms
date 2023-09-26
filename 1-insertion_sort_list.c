@@ -1,7 +1,5 @@
 #include "sort.h"
 
-void swap_nodes(listint_t **list, listint_t *a, listint_t *b);
-
 /**
  * insertion_sort_list - sorts a double linked list of integers,
  * in ascending order.
@@ -42,4 +40,3 @@ void insertion_sort_list(listint_t **list)
 		current = current->next;
 	}
 }
-
